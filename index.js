@@ -1,6 +1,6 @@
 require('dotenv').config()
 
-const { leerInput, inquirerMenu, pausa } = require('./helpers/inquirer');
+const { leerInput, inquirerMenu, pausa, listarLugares } = require('./helpers/inquirer');
 const Busquedas = require('./models/busquedas');
 
 
@@ -17,24 +17,43 @@ const main = async() => {
             case 1:
 
                 //Mostrar mensaje 
-                const lugar = await leerInput('Ciudad: ');
-                await busquedas.ciudad( lugar );
-
+                const termino = await leerInput('Ciudad: ');
+                
                 //Buscar los lugares 
-
+                const lugares = await busquedas.ciudad( termino );
+                
                 //Seleccionar el lugar
+                const id = await listarLugares(lugares)
+                if ( id === '0' ) continue;
+
+                const lugarSel = lugares.find( l => l.id === id );
+                
+                // Guardar en DB
+                busquedas.agregarHistorial( lugarSel.nombre );
+                
 
                 //Clima
+                const clima = await busquedas.climaLugar( lugarSel.lat, lugarSel.lng );
 
                 //Mostrar resultados
-                console.log('\nInformacion de la ciudad\n'.gray);
-                console.log('Ciudad:', )
-                console.log('Latitud:', )
-                console.log('Longitud:', )
-                console.log('Temperatura:', )
-                console.log('Temperatura Minima:', )
-                console.log('Temperatura Maxima:', )
+                console.clear()
+                console.log('\nInformacion de la ciudad\n'.gray );
+                console.log('Ciudad:', lugarSel.nombre.gray );
+                console.log('Latitud:', lugarSel.lat );
+                console.log('Longitud:', lugarSel.lng );
+                console.log('Temperatura:', clima.temp );
+                console.log('Temperatura Minima:', clima.min );
+                console.log('Temperatura Maxima:', clima.max );
+                console.log('Como esta el clima:', clima.desc.gray );
 
+                break;
+
+                case 2:
+                    busquedas.historial.forEach( (lugar, i) => {
+                        const idx = `${ i + 1 }.`.green;
+                        console.log(`${ idx } ${ lugar }`)
+                    })
+                
                 break;
         }
 
