@@ -7,35 +7,21 @@ const preguntas = [
         name: 'opcion',
         message: '¿Qué desea hacer?',
         choices: [
+
             {
-                value: '1',
-                name: `${ '1.'.gray } Crear tarea`
+                value: 1,
+                name: `${ '1.'.gray } Buscar ciudad`
             },
+
             {
-                value: '2',
-                name: `${ '2.'.gray } Listar tareas`
+                value: 2,
+                name: `${ '2.'.gray } Historial`
             },
+
             {
-                value: '3',
-                name: `${ '3.'.gray } Listar tareas completadas`
-            },
-            {
-                value: '4',
-                name: `${ '4.'.gray } Listar tareas pendientes`
-            },
-            {
-                value: '5',
-                name: `${ '5.'.gray } Completar tarea(s)`
-            },
-            {
-                value: '6',
-                name: `${ '6.'.gray } Borrar tarea`
-            },
-            {
-                value: '0',
+                value: 0,
                 name: `${ '0.'.gray } Salir`
-            },
-            
+            },   
         ]
     }
 ];
@@ -47,7 +33,7 @@ const inquirerMenu = async() => {
     console.clear();
     console.log('============================================'.gray);
     console.log('=                                          ='.gray);
-    console.log('=               App de tareas              ='.gray);
+    console.log('=               App de clima               ='.gray);
     console.log('=                                          ='.gray);
     console.log('=           Seleccione una opción          ='.gray);
     console.log('=                                          ='.gray);
