@@ -9,6 +9,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+   "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
   "dependencies": {
     "axios": "^0.24.0",
     "colors": "^1.4.0",
